@@ -1,0 +1,86 @@
+# 	From A/B Test
+-> perform exploration on all adds
+-> the exploitation on optimal one
+-> demetir: lot of time & money
+
+From Multi-Arm Bandit problem, we combine both & go hand in hand
+------------------------------------------------------------------
+Steps: 	Screenshot (2730)
+
+Upper Confidence Bound (UCB) Algo.
+----------------------------------
+Steps: 	Screenshot (2731)
+------------------------------------------------------------------
+// Screenshot (2732)
+- colored lines are actual distribution(we don;t know yet)
+- red dotted lines are our starting pt.
+- grey box are Confidence band i.e created with high certanity that it will include actual distribution/outcome.
+- 1st few rounds will be just trails on machine/ ads to place starting pt.(red dotted line) & come up with Confidence band. 
+- in starting, Confidence band will be large but is designed specically in way that expected val(colored line) with high level of Confidence falls inside this Confidence band which is built around the red intial emprical value(dotted line) that we dervied.
+------------------------------------------------------------------
+How Algo. works?
+-> Intially all band have same upper Confidence level/bound
+-> lets run D3(can run anyone as all have same converge level).
+	Screenshot (2733)- red dot line goes down
+	we now have new observation inside this sample
+	val. can go up or down
+	go down- cuz red dot is like observed avg. & in long run always converge to expected avg/distribution/outcome.
+cuz we have next observation, next thing:
+	Confidence bound/intervl become smaller(Screenshot (2734)) as we have new observation.
+
+-> next run machine/ add with highest Confidence bound(ie any box except D3)
+	lets run D4. red dot go to expected val. so goes up(Screenshot (2735))- now D4 has highest Confidence bound of all
+If we end iteration here- we assume D4 is best & we start exploitng it.
+
+	Since we got new observation in D4 sample. we're more Confidence in this bound & these bounds are designed to include actual expected val.(we dont know yet- colored line).
+	so bound shrinks(Screenshot (2736)).
+Again all ads/machine at same level as Confidence bound goes down
+
+-> next run machine/ add with highest Confidence bound(ie any box except D3 & D4)
+	lets run D1, lets say it go up(away from converge pt. as all is probablity).(Screenshot (2737))(in long run- converge, randomly-can go anywhere)
+	new observ. in sample- so Confidence band converge(Screenshot (2738))
+
+-> next run machine/ add with highest Confidence bound(ie any box except D3 & D4 & D1)
+	lets run D2, dot line go down to converge pt.(Screenshot (2739))
+	converge again(Screenshot (2740))
+-> now D5
+	same thing. go to converge pt. & shrinks Screenshot (2744/45)
+	it's still best one, so go to converge pt. & shrinks again Screenshot (2746)
+
+-> in end: Screenshot (2747)
+we found D5 is best by exploration & exploitng.
+-------------------------------------------------------------------
+# 	in dataset
+we have 10 version of adds
+each time user log into accoune. we place 1 version of this add & observe response
+if user click add- reward = 1 collected else 0
+done this for 10000 users on social n/w.
+-> we dont show diff. version of add at random. we follow specific way
+
+Reinforcement Learning- strategy for each round depends on prev. reslt of previous rounds.
+eg. if we at 10th round- Algo.looks at result of 1st 10 round & based on that decide which version of add to show.
+i.e why Reinforcement Learning is also called Online Learning.
+--------------------------------------------------------------------
+# 	VVI to understand
+In Prev. modals we have features/ indepnd. var. & one depend var. 
+- We train data & find corr.
+
+In CLustering, we only had indepnd. var & no depend. var
+- we found clusters
+
+Here we will have no data- (dataset given is only for simulation)
+in real life: we have no data. we start experimenting with diff. version of adds. & acc. to result we observe, we will change strategy of placing add next time.
+
+Adds. shown will depend on result of prev. rounds.
+Thus our dataset is just simulation of wht is going to happen when we show Adds to users. Basically our dataset is what God knows.
+
+-> This dataset is telling us that for each round i.e for each user connecting to his acc. on which version of add user is going to click on.
+eg. for 1st user- if we run add to him, god dataset is telling that only version no. 1,5,9- user will click.
+
+Goal of Algo- 10 vers. of adds to 10000 rounds/ users. aim to maximise total reward i.e sum of all diff. reward(0-no click, 1-clicked) at each rounds obtained at diff. selections of adds.
+--------------------------------------------------------------------
+Reinforcement learning, in the context of artificial intelligence, is a type of dynamic programming that trains algorithms using a system of reward and punishment. A reinforcement learning algorithm, or agent, learns by interacting with its environment.
+
+Online machine learning is a method of machine learning in which data becomes available in a sequential order and is used to update the best predictor for future data at each step
+---------------------------------------------------------------------
+https://www.geeksforgeeks.org/upper-confidence-bound-algorithm-in-reinforcement-learning/

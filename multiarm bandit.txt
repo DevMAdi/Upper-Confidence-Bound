@@ -1,0 +1,45 @@
+# 	Multi-Arm Bandit problem
+In marketing terms, a multi-armed bandit solution is a 'smarter' or more complex version of A/B testing that uses machine learning algorithms to dynamically allocate traffic to variations that are performing well, while allocating less traffic to variations that are underperforming.
+
+Multi-Arm Bandit is a classic reinforcement learning problem, in which a player is facing with k slot machines or bandits, each with a different reward distribution, and the player is trying to maximise his cumulative reward based on trials/ maximise my return. 
+---------------------------------------------------------------------
+// Screenshot (2728)
+Assumption: Each of these machine have distribution(Screenshot (2729)) out of which it picks result. As user we don't know these distribution.
+	Aim: Figure out which is winning distribution for us quick
+
+For our eg. D-5 has best distribution as it is most lt. skewed.
+	A left-skewed or negative distribution will have the mean to the left of the median
+	so for our modal- mean/avg is more towards +ve side of no. line & thus winning chance increase
+	in practical terms this means a higher level of occurrences took place at the high end of the distribution.
+
+We don't knw this distribution. & aim is to Find it quick(the long we take to Figure it out, the more money we spend betting on wrong ones)
+-----------------------------------------------------------------
+# 	Exploration v/s Exploitation
+"Exploration"- where we gather more information that might lead us to better decisions in the future
+"Exploitation"- where we make the best decision given current information. This comes up because we're learning on-line.
+
+In Reinforcement Learning, this type of decision is called exploitation when you keep doing what you were doing, and exploration when you try something new.
+
+Exploration means that you search over the whole sample space (exploring the sample space) while exploitation means that you are exploiting the promising areas found when you did the exploration.
+
+Eg.
+D-4 also has higher outcome(left-skewed) and so we may believe this has best distribution & start "exploitating" it.
+but since we stoped "exploring", we didnt found out that D-5 actually has best outcome in reality
+
+We will still win but not from optimal machine.
+This leads to "Regret".
+Regret- expected decrease in reward gained due to executing the learning algorithm instead of behaving optimally from the very beginning. This measure is known as regret
+	difference between optimal and actual reward.
+	Every step that is taken by the algorithm in reinforcement learning has a return or reward associated with it. If you had taken the optimal steps at each trial, your total reward is called the optimal reward.
+-------------------------------------------------------------------
+Multi-Arm Bandit has modern application in advertisment problems.
+
+# A/b testing vs multi-armed bandits
+eg. we have multiple ads of same brand & then run multiple A/B tests. & wait until large enough samples collected & then decide which is best.
+	demerit: lot of time & money spend
+	A/b test is pure exploration & not Exploting. 
+
+Soln: Multi-Arm Bandit
+
+With A/B testing, you have a limited period of pure exploration where you allocate traffic in equal numbers to Version A and Version B. 
+With multi-armed bandit testing, the tests are adaptive, and include periods of exploration and exploitation at the same time.
